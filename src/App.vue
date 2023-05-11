@@ -1,10 +1,10 @@
 
 <template>
   
-  <img alt="Boise Cascade Logo" src="./assets/bc.png" class = "image-resize" /> <!-- This needs to be resized smaller! -->
-  <!--                          Use "./assets/bc.png" for Boise Cascade Logo -->
-
-  <ToDoList msg="Justin's To Do List"/> <!-- App Title -->
+  <div id = "ToDoListApp">
+    <img alt="Boise Cascade Logo" src="./assets/bc.png" style = "width: 5%" /> 
+    <ToDoList msg="Justin's To Do List"/> <!-- App Title -->
+  </div>
 
 </template>
 
@@ -29,10 +29,6 @@ export default {
   text-align: center;
   color: #000000;
   margin-top: 10px;
-}
-.image-resize
-{
-  width: 5%;
 }
 
 </style>
