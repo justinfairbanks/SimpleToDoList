@@ -2,10 +2,10 @@
 <template>
   
   <div id = "ToDoListApp">
-    <img alt="Boise Cascade Logo" src="./assets/bc.png" style = "width: 5%" /> 
-    <ToDoList msg="Justin's To Do List"/> <!-- App Title -->
+      <img alt="Boise Cascade Logo" src="./assets/bc.png" style = "width: 5%" /> <!-- Image size reduced -->
+      <ToDoList msg="Justin's Task List"/> <!-- App Title -->
   </div>
-
+  
 </template>
 
 
