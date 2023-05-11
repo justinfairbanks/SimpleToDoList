@@ -14,6 +14,16 @@
     <button type="submit" @click = "addTask" class="addButton" >Add</button> 
   </form>
   
+  <!-- Sort Task Radio Button -->
+
+  <div>
+
+    <h5> Sort by...</h5>
+    <input type = "radio" v-model = "color" value = "0">Newest First
+    <input type = "radio" v-model = "color" value = "1">Oldest First
+
+  </div>
+
   <!-- List of Tasks -->
 
   <div>
@@ -43,7 +53,7 @@ import { ref } from "vue";
     },
     data() {
 
-      const task = ref("");
+      const task = ref(""); //define const vars
       const tasks = ref([]);
       
       
@@ -63,9 +73,6 @@ import { ref } from "vue";
         addTask,
       };
     }
-
-
-    
   }
 
 </script>
@@ -74,21 +81,23 @@ import { ref } from "vue";
 
 <style scoped>
 
-  ::placeholder { /* Centers the place holder in text box */ 
+  ::placeholder { /* Centers the placeholder text */ 
     text-align: center; 
   }
 
   .centered-input {
-    text-align: center;
+    text-align: center; /* Makes user typing in middle of text box */
+    font-size: 20px;
+    padding: 4px 16px;
   }
 
   .addButton {
-    padding: 6px 8px;
-    /* margin-left: 150px; */
+    padding: 6px 12px; /* Size of button */
+    margin-left: 225px;
     margin-top: 4px;
-    margin-bottom: 8px;
+    margin-bottom: 20px;
 
-    font-size: 10px;
+    font-size: 20px;
     background-color: rgb(1, 196, 255);
     color: rgb(255, 255, 255);
     border: none;
@@ -99,20 +108,20 @@ import { ref } from "vue";
   .task-list {
     display: flex;
     border-width: 1px;
-    margin-left: 400px;
-    margin-right: 400px;
+    margin-left: 600px;
+    margin-right: 600px;
     flex-direction: column; /* oldest task stays on top of stack */
   }
 
   .task-item {
     background-color: rgba(209, 79, 133, 0.13);
-    padding: 5px;
+    padding: 12px;
     margin-bottom: 1%;
     margin-top: 1%;
     border: 1px solid;
     border-radius: 1px;
-    min-height: 10px;
-    font-size: 10px;
+    min-height: 13px;
+    font-size: 15px;
     font-weight: bold;
   }
 
