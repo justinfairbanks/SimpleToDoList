@@ -19,8 +19,8 @@
   <div>
 
     <h5> Sort by...</h5>
-    <input type = "radio" v-model = "color" value = "0">Newest First
-    <input type = "radio" v-model = "color" value = "1">Oldest First
+    <input type = "radio" v-model = "order" name="sort" value = "0">Oldest First
+    <input type = "radio" v-model = "order" name="sort" value = "1">Newest First
 
   </div>
 
@@ -28,7 +28,7 @@
 
   <div>
     <ul class="task-list">
-      <li v-for="todo in tasks" :key="todo.id" class="task-item">
+      <li v-for="todo in sortedTasks" :key="todo.id" class="task-item">
         <div>
           {{ todo.text }}
         </div>
@@ -68,11 +68,32 @@ import { ref } from "vue";
       }
       
       return {
+        order:0,
         task,
         tasks,
         addTask,
       };
+    },
+    computed: {
+      sortedTasks() {
+        if (this.order === "1") {
+          return this.tasks.slice().reverse();
+        }
+        else {
+          return this.tasks;
+        }
+
+      }
+
+
+
+
     }
+
+
+
+
+
   }
 
 </script>
