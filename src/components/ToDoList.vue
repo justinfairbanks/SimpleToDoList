@@ -1,11 +1,17 @@
 <template>
 
-  <h1>{{ msg }}</h1> <!-- Page Title -->
+  <!-- Page Title -->
 
-  <input v-model="task" placeholder="new task" @keyup.enter="addTask"> <!-- Input Text Box -->
+  <h1>{{ msg }}</h1> 
+
+  <!-- Input Text Box -->
+
+  <input v-model="task" placeholder="new task" @keyup.enter="addTask" class = "centered-input">
+  
+  <!-- Add Task Button -->
   
   <form @submit.prevent="addTask">
-    <button type="submit" @click = "addTask" class="addButton" >Add</button> <!-- Add Task Button -->
+    <button type="submit" @click = "addTask" class="addButton" >Add</button> 
   </form>
   
   <!-- List of Tasks -->
@@ -21,6 +27,9 @@
   </div>
 
 </template>
+
+
+
 
 <script>
 
@@ -69,6 +78,10 @@ import { ref } from "vue";
     text-align: center; 
   }
 
+  .centered-input {
+    text-align: center;
+  }
+
   .addButton {
     padding: 6px 8px;
     /* margin-left: 150px; */
@@ -85,7 +98,7 @@ import { ref } from "vue";
 
   .task-list {
     display: flex;
-    border: 1px;
+    border-width: 1px;
     margin-left: 400px;
     margin-right: 400px;
     flex-direction: column; /* oldest task stays on top of stack */
@@ -103,9 +116,7 @@ import { ref } from "vue";
     font-weight: bold;
   }
 
-  h3 {
-    margin: 40px 0 0;
-  }
+
   ul {
     list-style-type: none;
     padding: 0;
@@ -114,7 +125,5 @@ import { ref } from "vue";
     display: inline-block;
     margin: 0 10px;
   }
-  a {
-    color: #1575f3;
-  }
+
 </style>
