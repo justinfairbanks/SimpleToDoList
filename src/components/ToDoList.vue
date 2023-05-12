@@ -28,13 +28,30 @@
 
   <!-- List of Tasks -->
 
+  <h3 class="taskHeader">Active Tasks</h3>
+
   <section>
     <ul class="task-list">
-      <li v-for="todo in sortedTasks" :key="todo.id"  @click = "toggleCompletion(todo)" class="task-item">
+      <li v-for="(todo, index) in sortedTasks" :key="todo.id"  @click = "remTask(todo, index)" class="task-item">
           
         <div>
           {{ todo.text }}
-          {{ todo.completed }} <!-- is the task completed? -->
+        </div>
+
+      </li>
+    </ul> 
+  </section>
+
+
+  <!-- Completed Tasks -->
+  <h3 class="taskHeader">Completed Tasks</h3>
+
+  <section>
+    <ul class="task-list">
+      <li v-for="todo in completedTasks" :key="todo.id" class="completed-items">
+          
+        <div>
+          {{ todo.text }}
         </div>
 
       </li>
@@ -58,6 +75,7 @@ import { ref } from "vue";
 
       const task = ref(""); //define const vars
       const tasks = ref([]);
+      const completedTasks = ref([]);
       
       
       function addTask() {
@@ -65,17 +83,25 @@ import { ref } from "vue";
           tasks.value.push({
             text: task.value,
             id: Date.now(),
-            completed: false, /* Completed flag to remove tasks */
           });
           task.value = "";
         }
       }
+
+      function remTask(elemnt, todo) {
+        this.tasks.splice(todo,1);
+        completedTasks.value.push(elemnt);
+      }
+
+
     
       return {
         order:0,
         task,
         tasks,
+        completedTasks,
         addTask,
+        remTask,
       };
     },
     computed: { // Based on the Radio Sorting Buttons
@@ -86,11 +112,6 @@ import { ref } from "vue";
         else {
           return this.tasks;
         }
-      }
-    },
-    methods: {
-      toggleCompletion() {
-        alert("test");
       }
     }
   }
@@ -151,6 +172,28 @@ import { ref } from "vue";
 
     font-size: 15px;
     font-weight: bold;
+  }
+
+  .completed-items{
+    text-align: center;
+    padding: 12px;
+    margin-bottom: 1%;
+    margin-top: 1%;
+
+    border: 1px solid;
+    border-radius: 1px;
+    min-height: 13px;
+
+    background-color: rgba(209, 79, 133, 0.13);
+    text-decoration: line-through;
+  }
+
+  .taskHeader {
+    border-bottom: 2px solid;
+    border-color: aqua;
+    text-align: center;
+    margin-left: 40%;
+    margin-right: 40%;
   }
 
   .task-item:hover { /* Hovering over tasks prior to completing them */
