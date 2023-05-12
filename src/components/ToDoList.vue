@@ -16,7 +16,7 @@
   
   <!-- Sort Task Radio Button -->
 
-  <div>
+  <div v-if="tasks.length > 0">
 
     <h5 class="sortTitle">Sort by...</h5>
     
@@ -27,7 +27,7 @@
 
   <!-- Active Tasks -->
 
-  <h3 class="taskHeader">Active Tasks</h3>
+  <h3 class="taskHeader" v-if="tasks.length > 0">Active Tasks</h3>
 
   <section>
     <ul class="task-list">
@@ -44,7 +44,7 @@
 
   <!-- Completed Tasks -->
 
-  <h3 class="taskHeader">Completed Tasks</h3>
+  <h3 class="taskHeader" v-if="completedTasks.length > 0">Completed Tasks</h3>
 
   <section>
     <ul class="task-list">
