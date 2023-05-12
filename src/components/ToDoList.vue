@@ -20,20 +20,19 @@
 
     <h5 class="sortTitle">Sort by...</h5>
     
-    <input type = "radio" v-model = "order" name="sort" value = "0">Oldest
-    
+    <input type = "radio" v-model = "order" name="sort" value = "0">Oldest    
     <input type = "radio" v-model = "order" name="sort" value = "1">Recent
 
   </div>
 
-  <!-- List of Tasks -->
+  <!-- Active Tasks -->
 
   <h3 class="taskHeader">Active Tasks</h3>
 
   <section>
     <ul class="task-list">
       <li v-for="(todo, index) in sortedTasks" :key="todo.id"  @click = "remTask(todo, index)" class="task-item">
-          
+      
         <div>
           {{ todo.text }}
         </div>
@@ -44,12 +43,14 @@
 
 
   <!-- Completed Tasks -->
+
   <h3 class="taskHeader">Completed Tasks</h3>
 
   <section>
     <ul class="task-list">
-      <li v-for="todo in completedTasks" :key="todo.id" class="completed-items">
-          
+      <li v-for="(todo, index) in completedTasks" :key="todo.id" @click = "restoreTask(todo,index)" class="completed-items">
+        <!-- @mouseover= "restoreMessage" -->
+       
         <div>
           {{ todo.text }}
         </div>
@@ -61,6 +62,7 @@
 </template>
 
 
+
 <script>
 
 import { ref } from "vue";
@@ -68,6 +70,7 @@ import { ref } from "vue";
   export default {
 
     name: 'ToDoList',
+    upHere: false,
     props: {
       msg: String
     },
@@ -88,13 +91,21 @@ import { ref } from "vue";
         }
       }
 
-      function remTask(elemnt, todo) {
-        this.tasks.splice(todo,1);
+      function remTask(elemnt, indx) {
+        this.tasks.splice(indx,1);
         completedTasks.value.push(elemnt);
       }
 
+      // function restoreMessage() {
+      //   alert("works");
+      // }
 
-    
+      function restoreTask (elemnt, indx) {
+        this.completedTasks.splice(indx,1);
+        tasks.value.push(elemnt);
+      }
+
+
       return {
         order:0,
         task,
@@ -102,6 +113,8 @@ import { ref } from "vue";
         completedTasks,
         addTask,
         remTask,
+        // restoreMessage,
+        restoreTask,
       };
     },
     computed: { // Based on the Radio Sorting Buttons
@@ -188,12 +201,17 @@ import { ref } from "vue";
     text-decoration: line-through;
   }
 
+  .completed-items:hover {
+    cursor: pointer;
+    text-decoration: none;
+  }
+
   .taskHeader {
     border-bottom: 2px solid;
     border-color: aqua;
     text-align: center;
-    margin-left: 40%;
-    margin-right: 40%;
+    margin-left: 45%;
+    margin-right: 45%;
   }
 
   .task-item:hover { /* Hovering over tasks prior to completing them */
