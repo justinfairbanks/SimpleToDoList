@@ -16,7 +16,7 @@
   
   <!-- Sort Task Radio Button -->
 
-  <div v-if="tasks.length > 0">
+  <div v-if="tasks.length > 1">
 
     <h5 class="sortTitle">Sort by...</h5>
     
@@ -27,10 +27,13 @@
 
   <!-- Active Tasks -->
 
-  <h3 class="taskHeader" v-if="tasks.length > 0">Active Tasks</h3>
+  <h3 v-if="tasks.length > 0" @click="toggleActiveDropdown" class="taskHeader">
+    Active Tasks <i :class="{'fa-chevron-down': !showActiveTasks, 'fa-chevron-up': showActiveTasks}" class="fas"></i>
+  </h3>
+
 
   <section>
-    <ul class="task-list">
+    <ul class="task-list" v-if="showActiveTasks">
       <li v-for="(todo, index) in sortedTasks" :key="todo.id"  @click = "remTask(todo, index)" class="task-item">
       
         <div>
@@ -41,13 +44,17 @@
     </ul> 
   </section>
 
+  
 
   <!-- Completed Tasks -->
 
-  <h3 class="taskHeader" v-if="completedTasks.length > 0">Completed Tasks</h3>
+  <h3 v-if="completedTasks.length > 0" @click="toggleCompletedDropdown" class="taskHeader">
+   Completed Tasks <i :class="{'fa-chevron-down': !showCompletedTasks, 'fa-chevron-up': showCompletedTasks}" class="fas"></i>
+  </h3>
+
 
   <section>
-    <ul class="task-list">
+    <ul class="task-list" v-if="showCompletedTasks">
       <li v-for="(todo, index) in completedTasks" :key="todo.id" @click = "restoreTask(todo,index)" class="completed-items">
         <!-- @mouseover= "restoreMessage" -->
        
@@ -96,6 +103,7 @@ import { ref } from "vue";
         completedTasks.value.push(elemnt);
       }
 
+
       // function restoreMessage() {
       //   alert("works");
       // }
@@ -111,6 +119,8 @@ import { ref } from "vue";
         task,
         tasks,
         completedTasks,
+        showCompletedTasks: false,
+        showActiveTasks: true,
         addTask,
         remTask,
         // restoreMessage,
@@ -125,6 +135,14 @@ import { ref } from "vue";
         else {
           return this.tasks;
         }
+      }
+    },
+    methods: {
+      toggleCompletedDropdown() {
+        this.showCompletedTasks = !this.showCompletedTasks;
+      },
+      toggleActiveDropdown() {
+        this.showActiveTasks = !this.showActiveTasks;
       }
     }
   }
@@ -212,6 +230,8 @@ import { ref } from "vue";
     text-align: center;
     margin-left: 45%;
     margin-right: 45%;
+
+    cursor: pointer;
   }
 
   .task-item:hover { /* Hovering over tasks prior to completing them */
