@@ -55,7 +55,7 @@
 
   <section>
     <ul class="task-list" v-if="showCompletedTasks">
-      <li v-for="(todo, index) in completedTasks" :key="todo.id" @click = "restoreTask(todo,index)" class="completed-items">
+      <li v-bind:title='restoreMessage' v-for="(todo, index) in completedTasks" :key="todo.id" @click = "restoreTask(todo,index)" class="completed-items">
         <!-- @mouseover= "restoreMessage" -->
        
         <div>
@@ -86,7 +86,7 @@ import { ref } from "vue";
       const task = ref(""); //define const vars
       const tasks = ref([]);
       const completedTasks = ref([]);
-      
+      const restoreMessage = "Restore Task";
       
       function addTask() {
         if (task.value) {
@@ -123,7 +123,7 @@ import { ref } from "vue";
         showActiveTasks: true,
         addTask,
         remTask,
-        // restoreMessage,
+        restoreMessage,
         restoreTask,
       };
     },
@@ -186,8 +186,10 @@ import { ref } from "vue";
     text-align: center;
     display: flex;
     border-width: 1px;
-    margin-left: 600px;
-    margin-right: 600px;
+
+    padding-left: min(30%);
+    padding-right: min(30%);
+    
     flex-direction: column; /* oldest task stays on top of stack */
   }
 
@@ -228,8 +230,9 @@ import { ref } from "vue";
     border-bottom: 2px solid;
     border-color: aqua;
     text-align: center;
-    margin-left: 45%;
-    margin-right: 45%;
+
+    margin-left: 43%;
+    margin-right: 43%;
 
     cursor: pointer;
   }
