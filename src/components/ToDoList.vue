@@ -34,7 +34,7 @@
 
   <section>
     <ul class="task-list" v-if="showActiveTasks">
-      <li v-for="(todo, index) in sortedTasks" :key="todo.id"  @click = "remTask(todo, index)" class="task-item">
+      <li v-bind:title='completeMessage' v-for="(todo, index) in sortedTasks" :key="todo.id"  @click = "remTask(todo, index)" class="task-item">
       
         <div>
           {{ todo.text }}
@@ -86,6 +86,7 @@ import { ref } from "vue";
       const task = ref(""); //define const vars
       const tasks = ref([]);
       const completedTasks = ref([]);
+      const completeMessage = "Mark Completed";
       const restoreMessage = "Restore Task";
       
       function addTask() {
@@ -103,11 +104,6 @@ import { ref } from "vue";
         completedTasks.value.push(elemnt);
       }
 
-
-      // function restoreMessage() {
-      //   alert("works");
-      // }
-
       function restoreTask (elemnt, indx) {
         this.completedTasks.splice(indx,1);
         tasks.value.push(elemnt);
@@ -121,9 +117,10 @@ import { ref } from "vue";
         completedTasks,
         showCompletedTasks: false,
         showActiveTasks: true,
+        completeMessage,
+        restoreMessage,
         addTask,
         remTask,
-        restoreMessage,
         restoreTask,
       };
     },
