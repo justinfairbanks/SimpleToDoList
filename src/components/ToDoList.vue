@@ -45,10 +45,9 @@
   </section>
 
   
-
   <!-- Completed Tasks -->
 
-  <h3 v-if="completedTasks.length > 0" @click="toggleCompletedDropdown" class="taskHeader">
+  <h3 v-bind:title='showCompleted' v-if="completedTasks.length > 0" @click="toggleCompletedDropdown" class="taskHeader">
    Completed Tasks <i :class="{'fa-chevron-down': !showCompletedTasks, 'fa-chevron-up': showCompletedTasks}" class="fas"></i>
   </h3>
 
@@ -56,7 +55,6 @@
   <section>
     <ul class="task-list" v-if="showCompletedTasks">
       <li v-bind:title='restoreMessage' v-for="(todo, index) in completedTasks" :key="todo.id" @click = "restoreTask(todo,index)" class="completed-items">
-        <!-- @mouseover= "restoreMessage" -->
        
         <div>
           {{ todo.text }}
@@ -87,6 +85,7 @@ import { ref } from "vue";
       const tasks = ref([]);
       const completedTasks = ref([]);
       const completeMessage = "Mark Completed";
+      const showCompleted = "Show Completed Tasks";
       const restoreMessage = "Restore Task";
       
       function addTask() {
@@ -117,6 +116,7 @@ import { ref } from "vue";
         completedTasks,
         showCompletedTasks: false,
         showActiveTasks: true,
+        showCompleted,
         completeMessage,
         restoreMessage,
         addTask,
