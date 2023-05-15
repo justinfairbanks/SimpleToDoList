@@ -27,7 +27,7 @@
 
   <!-- Active Tasks -->
 
-  <h3 v-if="tasks.length > 0" @click="toggleActiveDropdown" class="taskHeader">
+  <h3 v-bind:title='showActive' v-if="tasks.length > 0" @click="toggleActiveDropdown" class="taskHeader">
     Active Tasks <i :class="{'fa-chevron-down': !showActiveTasks, 'fa-chevron-up': showActiveTasks}" class="fas"></i>
   </h3>
 
@@ -85,7 +85,8 @@ import { ref } from "vue";
       const tasks = ref([]);
       const completedTasks = ref([]);
       const completeMessage = "Mark Completed";
-      const showCompleted = "Show Completed Tasks";
+      const showActive = "Toggle Active Tasks";
+      const showCompleted = "Toggle Completed Tasks";
       const restoreMessage = "Restore Task";
       
       function addTask() {
@@ -116,6 +117,7 @@ import { ref } from "vue";
         completedTasks,
         showCompletedTasks: false,
         showActiveTasks: true,
+        showActive,
         showCompleted,
         completeMessage,
         restoreMessage,
